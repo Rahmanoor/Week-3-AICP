@@ -1,0 +1,109 @@
+import matplotlib.pyplot as plt
+
+x = [1.0, 2.0, 3.0]
+y = [2.0, 4.0, 1.0]
+
+plt.plot(x, y)
+
+plt.xlabel('x-axis')
+plt.ylabel('y-axis')
+plt.title('Sample graph')
+
+plt.show()
+
+
+
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.array([10, 15, 20, 25, 30])
+
+y1 = np.array([10, 35, 10, 35, 10])
+y2 = np.array([35, 10, 35, 10, 35])
+
+plt.plot(x, y1,'r-', linewidth=3,label='line1-width-3')
+
+plt.plot(x,y2,'b-',linewidth=5,label='line2-width-5')
+
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+
+plt.title('Two or more lines with different widths and colors with suitable legends ')
+
+plt.legend()
+
+plt.show()
+
+
+
+
+import matplotlib.pyplot as plt
+
+def plot_horizontal_bar_chart(languages, popularity):
+    y_pos = range(len(languages))  
+    plt.barh(y_pos, popularity, color='skyblue')
+    plt.yticks(y_pos, languages)  
+    plt.xlabel('Popularity')
+    plt.ylabel('Programming Languages')
+    plt.title('Popularity of Programming Languages')
+    plt.show()
+
+languages = ['Java', 'Python', 'PHP', 'JavaScript', 'C#', 'C++']
+popularity = [22.2, 17.6, 8.8, 8, 7.7, 6.7]
+
+plot_horizontal_bar_chart(languages, popularity)
+
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+data = {'a': [2, 4, 4, 6, 10],
+        'b': [4, 8, 3, 7, 2],
+        'c': [5, 5, 2, 4, 4],
+        'd': [7,5 ,6 ,8 ,3],
+        'e': [6 ,6 ,6 ,6 ,2]}
+
+df = pd.DataFrame(data)
+
+ax = df.plot(kind='bar', stacked=False)
+plt.grid(True)
+plt.show()
+
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('E:\AICP\Internship\Week 3\Tasks\olympicWinners export.csv_exported.csv')
+
+df = df.sort_values(by='/gold', ascending=False)
+
+top_countries = df.head(5)
+
+plt.figure(figsize=(8, 8))
+plt.pie(top_countries['/gold'], labels=top_countries['/country'], autopct='%1.1f%%', startangle=140)
+plt.title('Gold Medal Achievements of Five Most Successful Countries (2016 Olympics)')
+plt.axis('equal')  
+plt.show()
+
+
+
+
+import matplotlib.pyplot as plt
+
+math_marks = [88, 92, 80, 89, 100, 80, 60, 100, 80, 34]
+science_marks = [35,79,79,48,100,88,32,45 ,20 ,30]
+marks_range = [10 ,20 ,30 ,40 ,50 ,60 ,70 ,80 ,90 ,100]
+
+plt.scatter(marks_range, math_marks,label='Math marks', color='r')
+plt.scatter(marks_range, science_marks,label='Science marks', color='g')
+
+plt.title('Scatter Plot')
+plt.xlabel('Marks Range')
+plt.ylabel('Marks Scored')
+
+plt.legend()
+
+plt.show()
