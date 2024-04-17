@@ -1,0 +1,166 @@
+Task 1
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import plotly.express as px
+
+# Read the CSV file
+menu_df = pd.read_csv('E:\AICP\Internship\Week 4\menu.csv')
+
+# Display the first few rows of the dataframe to verify it's loaded correctly
+print(menu_df.head())
+
+Task 2
+
+stats_all_columns = menu_df.describe()
+print("Statistical facts for all columns:")
+print(stats_all_columns)
+
+attributes = ['Calories', 'Total Fat', 'Carbohydrates', 'Dietary Fiber', 'Sugars', 
+              'Protein', 'Vitamin A (% Daily Value)', 'Vitamin C (% Daily Value)', 
+              'Calcium (% Daily Value)', 'Iron (% Daily Value)']
+
+max_values = menu_df[attributes].max()
+print("\nMaximum values for specified attributes:")
+print(max_values)
+
+Task 3
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+
+# Sample data: replace this with your actual DataFrame
+data = {
+    'Calories': [...],
+    'Total Fat': [...],
+    'Carbohydrates': [...],
+    # Add all other variables here...
+}
+
+df = pd.DataFrame(data)
+
+# Compute the correlation matrix
+corr = df.corr()
+
+# Generate a mask for the upper triangle
+mask = np.triu(np.ones_like(corr, dtype=bool))
+
+# Set up the matplotlib figure
+f, ax = plt.subplots(figsize=(11, 9))
+
+# Generate a custom diverging colormap
+cmap = sns.diverging_palette(230, 20, as_cmap=True)
+
+# Draw the heatmap with the mask and correct aspect ratio
+sns.heatmap(corr, mask=mask, cmap=cmap, vmax=.3, center=0,
+            square=True, linewidths=.5, cbar_kws={"shrink": .5})
+
+plt.show()
+
+Task 4
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Sample data: replace this with your actual DataFrame
+data = {
+    'Food Category 1': [...],
+    'Food Category 2': [...],
+    'Food Category 3': [...],
+    # Add all other categories here...
+}
+
+df = pd.DataFrame(data)
+
+# Create a boxplot
+sns.boxplot(data=df)
+
+# Show the plot
+plt.show()
+
+
+Task 5
+
+import pandas as pd
+
+# Read the dataset into a Pandas DataFrame
+data = pd.read_csv('E:\AICP\Internship\Week 4\menu.csv')  # Replace 'nutrition_data.csv' with your file path
+
+# Dictionary to store the results
+high_quantity_items = {}
+
+# Iterate through each nutrient
+nutrients = ['Calories', 'Total Fat', 'Carbohydrates', 'Dietary Fiber', 'Sugars', 'Protein',
+             'Vitamin A (% Daily Value)', 'Vitamin C (% Daily Value)', 'Calcium (% Daily Value)',
+             'Iron (% Daily Value)']
+
+for nutrient in nutrients:
+    # Find the food item with the highest value for the current nutrient
+    max_value_index = data[nutrient].idxmax()
+    high_quantity_items[nutrient] = {
+        'food_item': data.loc[max_value_index, 'Item'],
+        'quantity': data.loc[max_value_index, nutrient]
+    }
+
+# Print the results
+for nutrient, info in high_quantity_items.items():
+    print(f"The food item with the highest {nutrient} is '{info['food_item']}' with a quantity of {info['quantity']}.")
+
+
+Task 6
+
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Read the dataset into a Pandas DataFrame
+data = pd.read_csv('E:\AICP\Internship\Week 4\menu.csv')  # Replace 'nutrition_data.csv' with your file path
+
+# List of attributes to plot
+attributes = ['Calories', 'Total Fat', 'Carbohydrates', 'Dietary Fiber', 'Sugars', 'Protein',
+              'Vitamin A (% Daily Value)', 'Vitamin C (% Daily Value)', 'Calcium (% Daily Value)',
+              'Iron (% Daily Value)']
+
+# Loop through each attribute and draw the stripplot
+for attribute in attributes:
+    plt.figure(figsize=(10, 6))  # Adjust figure size as needed
+    sns.stripplot(x='Category', y=attribute, data=data, jitter=True)
+    plt.title(f'Stripplot of {attribute} by Category')
+    plt.xlabel('Category')
+    plt.ylabel(attribute)
+    plt.xticks(rotation=45)  # Rotate category labels for better readability
+    plt.tight_layout()
+    plt.show()
+
+
+Task 7
+
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Read the dataset into a Pandas DataFrame
+data = pd.read_csv('E:\AICP\Internship\Week 4\menu.csv')  # Replace 'nutrition_data.csv' with your file path
+
+# List of unique categories
+categories = data['Category'].unique()
+
+# Plotting for each category
+for category in categories:
+    plt.figure(figsize=(10, 6))  # Adjust figure size as needed
+    
+    # Filter data for the current category
+    category_data = data[data['Category'] == category]
+    
+    # Horizontal bar plot
+    sns.barplot(x='Calories', y='Item', data=category_data, color='skyblue')
+    plt.title(f'Calories in {category}')
+    plt.xlabel('Calories')
+    plt.ylabel('Food Item')
+    plt.tight_layout()
+    
+    plt.show()
